@@ -1,0 +1,11 @@
+expression 'DirectQuery to AS - sales_semantic' =
+		let
+		    Source = AnalysisServices.Database("powerbi://api.powerbi.com/v1.0/d2a20c68-200c-40fa-be20-86101df00e2f/ws_sales_analytics", "sales_semantic"),
+		    Cubes = Table.Combine(Source[Data]),
+		    Cube = Cubes{[Id="Model", Kind="Cube"]}[Data]
+		in
+		    Cube
+	lineageTag: 7ff11a7f-d738-4532-870e-1ccfc2f1671c
+
+	annotation PBI_IncludeFutureArtifacts = True
+

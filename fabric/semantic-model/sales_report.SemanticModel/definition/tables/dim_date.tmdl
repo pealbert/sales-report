@@ -1,0 +1,100 @@
+table dim_date
+	lineageTag: d9aaa037-498e-40f4-8d94-9d062fb3f473
+	sourceLineageTag: 522adcda-366e-4d62-9ee8-0cfd74a35d6c
+
+	column order_date_key
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		lineageTag: aa068321-6f05-45e0-8c5d-f36a40dd1473
+		sourceLineageTag: c2c0d297-2dea-434a-a7b6-3dc0ca26b4be
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: order_date_key
+
+		annotation SummarizationSetBy = User
+
+	column full_date
+		dataType: dateTime
+		formatString: General Number
+		lineageTag: 6c257cf7-e785-4c37-893f-01bfcbd457c3
+		sourceLineageTag: f45679d4-f642-4fba-afc9-bcb9305e165f
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: full_date
+
+		annotation SummarizationSetBy = User
+
+	column year
+		dataType: int64
+		formatString: 0
+		lineageTag: d37d9fb4-6de4-425e-a75a-e9f9f13f3acb
+		sourceLineageTag: 95d6e43a-531a-4f82-b024-85cdd465245b
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: year
+
+		annotation SummarizationSetBy = User
+
+	column month_number
+		dataType: int64
+		formatString: 0
+		lineageTag: 22bf9bfa-2605-4671-bf81-af6f6fe9b030
+		sourceLineageTag: b194938b-15a6-4f6b-82e5-27205f3cac30
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: month_number
+
+		annotation SummarizationSetBy = User
+
+	column month_name
+		dataType: string
+		lineageTag: 77a96e07-6fa3-4212-b1d0-3620a842f537
+		sourceLineageTag: 3cfbc9e9-0295-476b-9ec6-f6cf7b36ef96
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: month_name
+		sortByColumn: month_number
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = User
+
+	column quarter
+		dataType: int64
+		formatString: 0
+		lineageTag: 61fa8669-dd09-4bd6-abed-31bcb052e032
+		sourceLineageTag: 02cfda90-3c25-4c94-a24d-cdf9a5c10045
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: quarter
+
+		annotation SummarizationSetBy = User
+
+	column day_of_week
+		dataType: string
+		lineageTag: da69606f-5e3a-47f2-b10d-051cb1051fb6
+		sourceLineageTag: 4add9904-715b-428e-ac54-10cc16c74065
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: day_of_week
+
+		annotation SummarizationSetBy = User
+
+	column is_weekend
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 4cacd951-fc37-4ead-b3a2-8425f22d9520
+		sourceLineageTag: 410902f2-579e-4ae2-9768-bb5121c5e40b
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: is_weekend
+
+		annotation SummarizationSetBy = User
+
+	partition dim_date = entity
+		mode: directQuery
+		source
+			entityName: dim_date
+			expressionSource: 'DirectQuery to AS - sales_semantic'
+

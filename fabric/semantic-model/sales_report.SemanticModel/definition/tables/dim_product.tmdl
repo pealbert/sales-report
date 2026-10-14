@@ -1,0 +1,32 @@
+table dim_product
+	lineageTag: 5be268a4-9ba8-4c59-8232-f0f916c98ba4
+	sourceLineageTag: 30f1d2c7-dbdd-43b3-a8a1-c422ce07c3e9
+
+	column product_key
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		lineageTag: 60b7af40-b15d-443e-9a87-095cc0c7735f
+		sourceLineageTag: 6272e144-d3c5-459b-bee9-4c5a6b9d9c10
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: product_key
+
+		annotation SummarizationSetBy = User
+
+	column product_category
+		dataType: string
+		lineageTag: 4b6a19df-0f82-4902-9b62-348a419563ce
+		sourceLineageTag: 31f1b8e0-fba0-47b1-a17a-24158366a7d1
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: product_category
+
+		annotation SummarizationSetBy = User
+
+	partition dim_product = entity
+		mode: directQuery
+		source
+			entityName: dim_product
+			expressionSource: 'DirectQuery to AS - sales_semantic'
+

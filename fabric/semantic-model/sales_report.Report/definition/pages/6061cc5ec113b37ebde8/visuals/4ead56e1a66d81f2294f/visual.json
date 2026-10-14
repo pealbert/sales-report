@@ -1,0 +1,17 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "4ead56e1a66d81f2294f",
+  "position": {
+    "x": 608,
+    "y": 0,
+    "z": 1000,
+    "height": 48,
+    "width": 304,
+    "tabOrder": 22002
+  },
+  "visualGroup": {
+    "displayName": "Quarter",
+    "groupMode": "ScaleMode"
+  },
+  "parentGroupName": "e93140a184e4ca83312c"
+}

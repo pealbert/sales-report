@@ -1,0 +1,151 @@
+table fact_sales
+	lineageTag: 57e1f5f4-cd91-46f5-8f48-79c3ed89f7d4
+	sourceLineageTag: 1015fa3e-6825-478f-8a15-71de9151201e
+
+	measure 'Avg Order Value' = DIVIDE([Total Revenue], [Total Orders], 0)
+		lineageTag: 515511ec-febf-402f-85f5-7265a1267c24
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Avg Quantity per Order' = DIVIDE(SUM(fact_sales[quantity]), DISTINCTCOUNT(fact_sales[order_id]))
+		lineageTag: f7f37dbf-abda-46a9-b991-7b9497f87823
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Avg Revenue per Order' = DIVIDE(SUM(fact_sales[revenue]),DISTINCTCOUNT(fact_sales[order_id]))
+		lineageTag: 9d9d8846-b939-4426-9bd5-19920d6a1ef6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Customer Rank' =
+			
+			RANKX(
+			    ALL(dim_customer[customer_name]),
+			    [Total Revenue],
+			    ,
+			    DESC,
+			    Dense
+			)
+		lineageTag: cf917a10-8b9b-438c-8e4e-9506d4ae693a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Customers' = DISTINCTCOUNT(dim_customer[customer_name])
+		lineageTag: e0b7a344-9cb1-4537-8dd4-e0fcfc428d5a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Orders' = COUNTROWS(fact_sales)
+		formatString: 0.00
+		lineageTag: d2f3ddb3-ffea-47f8-a5bf-bbe2584ab79e
+
+	measure 'Total Quantity Sold' = SUM(fact_sales[quantity])
+		lineageTag: 3d0f5c65-9d8c-4b98-b8e7-f4c72d8b41d9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Revenue' = SUM(fact_sales[revenue])
+		lineageTag: 2d20cba2-ed73-4270-b4be-30adb6df4523
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Revenue ($USD)' = SUM(fact_sales[revenue_usd])
+		lineageTag: 58d35ebc-4bea-4ff8-a075-3f1c88f8392f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column order_id
+		dataType: string
+		lineageTag: 3e82ecd9-0175-4255-9c60-01585951f871
+		sourceLineageTag: 55962ef1-2d4d-43e5-a11c-d65b68a39f39
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = User
+
+	column order_date_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 822dae92-d7f7-4424-a2b4-af8378be4d5e
+		sourceLineageTag: 20115504-fd5d-4f1e-90ed-8c1ad9907818
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: order_date_key
+
+		annotation SummarizationSetBy = User
+
+	column customer_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 774eb968-36cc-476e-b974-591dea9e3c80
+		sourceLineageTag: 918885e7-cd40-4b83-a78c-d7ffdf9cb6b8
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: customer_key
+
+		annotation SummarizationSetBy = User
+
+	column product_key
+		dataType: int64
+		formatString: 0
+		lineageTag: cddd79e8-0170-403a-8ebc-bcc8a2ab51b2
+		sourceLineageTag: 9f55e81c-4fec-4370-b3b1-d1047ccde014
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: product_key
+
+		annotation SummarizationSetBy = User
+
+	column region_key
+		dataType: int64
+		formatString: 0
+		lineageTag: f0eeaafc-8451-4708-b592-5f54f829274e
+		sourceLineageTag: 5bbb6ef9-cc80-4302-9292-ceb38ea8d9e5
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: region_key
+
+		annotation SummarizationSetBy = User
+
+	column revenue
+		dataType: double
+		lineageTag: dbbc7e18-7b55-4e90-ab15-b50a8397d73a
+		sourceLineageTag: 75dec7ce-efe6-4057-8d71-ab3f4ad6037b
+		dataCategory: Uncategorized
+		summarizeBy: sum
+		sourceColumn: revenue
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column quantity
+		dataType: int64
+		formatString: 0
+		lineageTag: 8570b701-ddf4-4e08-b3ab-2170426e24e4
+		sourceLineageTag: 09f7b600-72b4-487a-bbaa-e0c49f378608
+		dataCategory: Uncategorized
+		summarizeBy: sum
+		sourceColumn: quantity
+
+		annotation SummarizationSetBy = User
+
+	column revenue_usd
+		dataType: double
+		lineageTag: a17a306b-349d-4b4d-9355-8c658e5ffa64
+		sourceLineageTag: f0ed29e3-9743-46e2-8d3c-f8e5cd8d9b84
+		dataCategory: Uncategorized
+		summarizeBy: sum
+		sourceColumn: revenue_usd
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition fact_sales = entity
+		mode: directQuery
+		source
+			entityName: fact_sales
+			expressionSource: 'DirectQuery to AS - sales_semantic'
+

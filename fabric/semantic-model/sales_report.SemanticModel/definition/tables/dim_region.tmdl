@@ -1,0 +1,32 @@
+table dim_region
+	lineageTag: 58f8d45a-41bb-4248-b06b-7bdb810c5d13
+	sourceLineageTag: b7fa5ff0-1770-41b1-9087-f626a8621816
+
+	column region_key
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		lineageTag: db3f787f-f53e-43fc-8ebe-e97c7585dc0f
+		sourceLineageTag: 17fa6777-d59f-4e81-8cc4-a1a023056656
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: region_key
+
+		annotation SummarizationSetBy = User
+
+	column region
+		dataType: string
+		lineageTag: b1af68c1-25d4-410a-ac52-84d67d728249
+		sourceLineageTag: 5214418d-1901-4abe-9997-1090c78dc751
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: region
+
+		annotation SummarizationSetBy = User
+
+	partition dim_region = entity
+		mode: directQuery
+		source
+			entityName: dim_region
+			expressionSource: 'DirectQuery to AS - sales_semantic'
+

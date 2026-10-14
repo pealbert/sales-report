@@ -1,0 +1,42 @@
+table dim_customer
+	lineageTag: 52d3b922-82f3-4996-a118-9802abccd1eb
+	sourceLineageTag: 19d023ae-5027-411d-a14d-5cfec1e16df8
+
+	column customer_key
+		dataType: int64
+		isNullable: false
+		formatString: 0
+		lineageTag: 0423fc77-557b-4806-81d4-4876ec100a63
+		sourceLineageTag: 427dc2c5-b88b-43c2-9ae6-7bca794c4352
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: customer_key
+
+		annotation SummarizationSetBy = User
+
+	column customer_name
+		dataType: string
+		lineageTag: 9f6c92d4-01ff-48a4-a066-72be4ef42db6
+		sourceLineageTag: 36cd54c0-af27-46f0-a5b4-74fbcf3b7c0c
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: customer_name
+
+		annotation SummarizationSetBy = User
+
+	column region
+		dataType: string
+		lineageTag: 5fb6b0d5-9f73-4e77-99df-87bb106fd864
+		sourceLineageTag: 3ced4bba-da1c-4763-be3d-b9131d3940d4
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: region
+
+		annotation SummarizationSetBy = User
+
+	partition dim_customer = entity
+		mode: directQuery
+		source
+			entityName: dim_customer
+			expressionSource: 'DirectQuery to AS - sales_semantic'
+
